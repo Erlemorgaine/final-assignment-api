@@ -7,6 +7,19 @@ const authenticate = passport.authorize('jwt', { session: false })
 
 const loadBatch = (req, res, next) => {
   const id = req.params.id
+  console.log(req.params.id)
+
+  Batch.findById(id)
+    .then((batch) => {
+      req.batch = batch
+      next()
+    })
+    .catch((error) => next(error))
+}
+
+const getStudent = (req, res, next) => {
+  const id = req.params.id
+  console.log(req.params.id)
 
   Batch.findById(id)
     .then((batch) => {
@@ -17,10 +30,10 @@ const loadBatch = (req, res, next) => {
 }
 
 const getStudents = (req, res, next) => {
-  Promise.all(req.batch.students.map(students => User.findById(student.userId)))
+  Promise.all(req.game.students.map(student => User.findById(student.userId)))
     .then((users) => {
-      // Combine student data and user's name
-      req.students = req.batch.students.map((student) => {
+      // Combine player data and user's name
+      req.students = req.batch.students.map((player) => {
         const { name } = users
           .filter((u) => u._id.toString() === student.userId.toString())[0]
 
@@ -35,9 +48,22 @@ const getStudents = (req, res, next) => {
     .catch((error) => next(error))
 }
 
+// const getStudents = (req, res, next) => {
+//   req.students = req.batch.students
+//   next()
+// }
+
 module.exports = io => {
   router
     .get('/batches/:id/students', loadBatch, getStudents, (req, res, next) => {
+      console.log('getting students')
+      if (!req.batch || !req.students) { return next() }
+      res.json(req.batch.students)
+    })
+
+    .get('/batches/:id/students/:id', loadBatch, /*getStudents,*/ (req, res, next) => {
+      console.log('getting one student')
+      console.log(req.params.id)
       if (!req.batch || !req.students) { return next() }
       res.json(req.students)
     })
@@ -65,7 +91,7 @@ module.exports = io => {
         .catch((error) => next(error))
     },
     // Fetch students data
-    getStudents,
+    /*getStudents,*/
     // Respond with new student data in JSON and over socket
     (req, res, next) => {
       io.emit('action', {
@@ -100,7 +126,7 @@ module.exports = io => {
 
     },
     // Fetch new student data
-    getStudents,
+    /*getStudents,*/
     // Respond with new student data in JSON and over socket
     (req, res, next) => {
       io.emit('action', {

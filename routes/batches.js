@@ -11,9 +11,6 @@ module.exports = io => {
   router
     .get('/batches', (req, res, next) => {
       Batch.find()
-        // Newest batches first
-        .sort({ createdAt: -1 })
-        // Send the data in JSON format
         .then((batches) => res.json(batches))
         // Throw a 500 error if something goes wrong
         .catch((error) => next(error))
@@ -29,8 +26,6 @@ module.exports = io => {
         .catch((error) => next(error))
     })
     .post('/batches', /*authenticate,*/ (req, res, next) => {
-      //console.log(req.body)
-      // fault here: it takes the existing database and INSERTS the new data
       let newBatch = req.body
       console.log(newBatch)
 
