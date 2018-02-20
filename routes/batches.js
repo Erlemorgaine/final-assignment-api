@@ -29,9 +29,8 @@ module.exports = io => {
         .catch((error) => next(error))
     })
     .post('/batches', authenticate, (req, res, next) => {
-      const newBatch = {
-        batchNr: Batch.count() + 1
-      }
+      const newBatch = req.body
+      //newBatch = { ...req.body, batchNr: (Batch.count() + 1)}
 
       Batch.create(newBatch)
         .then((batch) => {

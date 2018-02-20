@@ -49,7 +49,7 @@ module.exports = io => {
 
       // Change to compare new student id to existing students
       if (req.batch.students.filter((s) => s.userId.toString() === userId.toString()).length > 0) {
-        const error = Error.new('This students is already in the batch!')
+        const error = Error.new('This student is already in the batch!')
         error.status = 401
         return next(error)
       }
