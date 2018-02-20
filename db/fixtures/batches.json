@@ -10,11 +10,11 @@
         "days": [
           {
             "date": "Feb 10, 2018",
-            "color": "G"
+            "color": "green"
           },
           {
             "date": "Feb 11, 2018",
-            "color": "G"
+            "color": "green"
           }
         ]
       },
@@ -24,11 +24,11 @@
         "days": [
           {
             "date": "Feb 10, 2018",
-            "color": "Y"
+            "color": "yellow"
           },
           {
             "date": "Feb 11, 2018",
-            "color": "R"
+            "color": "red"
           }
         ]
       },
@@ -38,11 +38,11 @@
         "days": [
           {
             "date": "Feb 12, 2018",
-            "color": "R"
+            "color": "red"
           },
           {
             "date": "Feb 13, 2018",
-            "color": "G"
+            "color": "green"
           }
         ]
       }
@@ -60,11 +60,11 @@
         "days": [
           {
             "date": "March 10, 2018",
-            "color": "G"
+            "color": "green"
           },
           {
             "date": "March 11, 2018",
-            "color": "Y"
+            "color": "yellow"
           }
         ]
       },
@@ -74,11 +74,11 @@
         "days": [
           {
             "date": "March 14, 2018",
-            "color": "Y"
+            "color": "yellow"
           },
           {
             "date": "March 15, 2018",
-            "color": "R"
+            "color": "red"
           }
         ]
       },
@@ -88,11 +88,11 @@
         "days": [
           {
             "date": "March 14, 2018",
-            "color": "G"
+            "color": "green"
           },
           {
             "date": "March 15, 2018",
-            "color": "G"
+            "color": "green"
           }
         ]
       },
@@ -102,11 +102,11 @@
         "days": [
           {
             "date": "March 12, 2018",
-            "color": "Y"
+            "color": "yellow"
           },
           {
             "date": "March 13, 2018",
-            "color": "Y"
+            "color": "yellow"
           }
         ]
       }
@@ -124,11 +124,11 @@
         "days": [
           {
             "date": "April 10, 2018",
-            "color": "R"
+            "color": "red"
           },
           {
             "date": "April 11, 2018",
-            "color": "Y"
+            "color": "yellow"
           }
         ]
       },
@@ -138,11 +138,11 @@
         "days": [
           {
             "date": "April 14, 2018",
-            "color": "G"
+            "color": "green"
           },
           {
             "date": "April 15, 2018",
-            "color": "G"
+            "color": "green"
           }
         ]
       },
@@ -152,11 +152,11 @@
         "days": [
           {
             "date": "April 14, 2018",
-            "color": "R"
+            "color": "red"
           },
           {
             "date": "April 15, 2018",
-            "color": "R"
+            "color": "red"
           }
         ]
       },
@@ -166,11 +166,11 @@
         "days": [
           {
             "date": "April 12, 2018",
-            "color": "Y"
+            "color": "yellow"
           },
           {
             "date": "April 13, 2018",
-            "color": "G"
+            "color": "green"
           }
         ]
       }
