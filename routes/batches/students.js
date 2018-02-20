@@ -17,16 +17,16 @@ const loadBatch = (req, res, next) => {
 }
 
 const getStudents = (req, res, next) => {
-  Promise.all(req.batch.students.map(students => User.findById(player.userId)))
+  Promise.all(req.batch.students.map(students => User.findById(student.userId)))
     .then((users) => {
-      // Combine player data and user's name
-      req.players = req.batch.players.map((player) => {
+      // Combine student data and user's name
+      req.students = req.batch.students.map((student) => {
         const { name } = users
-          .filter((u) => u._id.toString() === player.userId.toString())[0]
+          .filter((u) => u._id.toString() === student.userId.toString())[0]
 
         return {
-          userId: player.userId,
-          symbol: player.symbol,
+          userId: student.userId,
+          symbol: student.symbol,
           name
         }
       })
@@ -49,7 +49,7 @@ module.exports = io => {
 
       // Change to compare new student id to existing students
       if (req.batch.students.filter((s) => s.userId.toString() === userId.toString()).length > 0) {
-        const error = Error.new('This students is already in the batch!')
+        const error = Error.new('This student is already in the batch!')
         error.status = 401
         return next(error)
       }
@@ -66,7 +66,7 @@ module.exports = io => {
     },
     // Fetch students data
     getStudents,
-    // Respond with new player data in JSON and over socket
+    // Respond with new student data in JSON and over socket
     (req, res, next) => {
       io.emit('action', {
         type: 'BATCH_STUDENTS_UPDATED',
@@ -99,15 +99,15 @@ module.exports = io => {
         .catch((error) => next(error))
 
     },
-    // Fetch new player data
+    // Fetch new student data
     getStudents,
-    // Respond with new player data in JSON and over socket
+    // Respond with new student data in JSON and over socket
     (req, res, next) => {
       io.emit('action', {
         type: 'BATCH_STUDENTS_UPDATED',
         payload: {
           batch: req.batch,
-          players: req.students
+          students: req.students
         }
       })
       res.json(req.students)

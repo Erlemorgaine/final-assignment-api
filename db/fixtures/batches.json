@@ -1,0 +1,180 @@
+[
+  {
+    "batchNr": "1",
+    "startDate": "Feb 9, 2018",
+    "endDate": "Feb 29, 2018",
+    "students": [
+      {
+        "name": "Hermione Granger",
+        "picture": "",
+        "days": [
+          {
+            "date": "Feb 10, 2018",
+            "color": "G"
+          },
+          {
+            "date": "Feb 11, 2018",
+            "color": "G"
+          }
+        ]
+      },
+      {
+        "name": "Ron Weasley",
+        "picture": "",
+        "days": [
+          {
+            "date": "Feb 10, 2018",
+            "color": "Y"
+          },
+          {
+            "date": "Feb 11, 2018",
+            "color": "R"
+          }
+        ]
+      },
+      {
+        "name": "Lucius Malfoy",
+        "picture": "",
+        "days": [
+          {
+            "date": "Feb 12, 2018",
+            "color": "R"
+          },
+          {
+            "date": "Feb 13, 2018",
+            "color": "G"
+          }
+        ]
+      }
+    ],
+    "askedStudents": []
+  },
+  {
+    "batchNr": "2",
+    "startDate": "March 9, 2018",
+    "endDate": "March 29, 2018",
+    "students": [
+      {
+        "name": "Edward Elric",
+        "picture": "",
+        "days": [
+          {
+            "date": "March 10, 2018",
+            "color": "G"
+          },
+          {
+            "date": "March 11, 2018",
+            "color": "Y"
+          }
+        ]
+      },
+      {
+        "name": "Roy Mustang",
+        "picture": "",
+        "days": [
+          {
+            "date": "March 14, 2018",
+            "color": "Y"
+          },
+          {
+            "date": "March 15, 2018",
+            "color": "R"
+          }
+        ]
+      },
+      {
+        "name": "Riza Hawkeye",
+        "picture": "",
+        "days": [
+          {
+            "date": "March 14, 2018",
+            "color": "G"
+          },
+          {
+            "date": "March 15, 2018",
+            "color": "G"
+          }
+        ]
+      },
+      {
+        "name": "Lan Fan",
+        "picture": "",
+        "days": [
+          {
+            "date": "March 12, 2018",
+            "color": "Y"
+          },
+          {
+            "date": "March 13, 2018",
+            "color": "Y"
+          }
+        ]
+      }
+    ],
+    "askedStudents": []
+  },
+  {
+    "batchNr": "3",
+    "startDate": "April 9, 2018",
+    "endDate": "April 29, 2018",
+    "students": [
+      {
+        "name": "Anna Marie Raven",
+        "picture": "",
+        "days": [
+          {
+            "date": "April 10, 2018",
+            "color": "R"
+          },
+          {
+            "date": "April 11, 2018",
+            "color": "Y"
+          }
+        ]
+      },
+      {
+        "name": "Hank McCoy ",
+        "picture": "",
+        "days": [
+          {
+            "date": "April 14, 2018",
+            "color": "G"
+          },
+          {
+            "date": "April 15, 2018",
+            "color": "G"
+          }
+        ]
+      },
+      {
+        "name": "James Howlett",
+        "picture": "",
+        "days": [
+          {
+            "date": "April 14, 2018",
+            "color": "R"
+          },
+          {
+            "date": "April 15, 2018",
+            "color": "R"
+          }
+        ]
+      },
+      {
+        "name": "Kitty Pride",
+        "picture": "",
+        "days": [
+          {
+            "date": "April 12, 2018",
+            "color": "Y"
+          },
+          {
+            "date": "April 13, 2018",
+            "color": "G"
+          }
+        ]
+      }
+    ],
+    "askedStudents": []
+  }
+]

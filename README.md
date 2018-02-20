@@ -1,6 +1,6 @@
-# Express Batchs API
+# Express Batches API
 
-RESTful Express API for Batchs on top of MongoDB.
+RESTful Express API for Batches on top of MongoDB.
 
 ## Authentication
 
@@ -28,7 +28,7 @@ Authorization: Bearer <token here>
 
 _**Note**: See `db/seed.js` for an example._
 
-## Batchs
+## Batches
 
 **Note:** See `models/batch.js` for the Batch schema attributes.
 

@@ -28,10 +28,11 @@ module.exports = io => {
         })
         .catch((error) => next(error))
     })
-    .post('/batches', authenticate, (req, res, next) => {
-      const newBatch = {
-        batchNr: Batch.count() + 1
-      }
+    .post('/batches', /*authenticate,*/ (req, res, next) => {
+      //console.log(req.body)
+      // fault here: it takes the existing database and INSERTS the new data
+      let newBatch = req.body
+      console.log(newBatch)
 
       Batch.create(newBatch)
         .then((batch) => {
@@ -39,6 +40,7 @@ module.exports = io => {
             type: 'BATCH_CREATED',
             payload: batch
           })
+          console.log(batch)
           res.json(batch)
         })
         .catch((error) => next(error))
