@@ -42,13 +42,12 @@ module.exports = io => {
     })
     .patch('/batches/:id', authenticate, (req, res, next) => {
       const id = req.params.id
-      const userId = req.account._id.toString()
 
       Batch.findById(id)
         .then((batch) => {
           if (!batch) { return next() }
 
-          const updatedBatch = processMove(batch, req.body, userId)
+          const updatedBatch = processMove(batch)
 
           Batch.findByIdAndUpdate(id, { $set: updatedBatch }, { new: true })
             .then((batch) => {

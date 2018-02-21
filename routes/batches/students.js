@@ -7,7 +7,6 @@ const authenticate = passport.authorize('jwt', { session: false })
 
 const loadBatch = (req, res, next) => {
   const id = req.params.id
-  console.log(req.params.id)
 
   Batch.findById(id)
     .then((batch) => {
@@ -17,9 +16,9 @@ const loadBatch = (req, res, next) => {
     .catch((error) => next(error))
 }
 
+//figure out how to use this
 const getStudent = (req, res, next) => {
   const id = req.params.id
-  console.log(req.params.id)
 
   Batch.findById(id)
     .then((batch) => {
@@ -56,14 +55,11 @@ const getStudents = (req, res, next) => {
 module.exports = io => {
   router
     .get('/batches/:id/students', loadBatch, getStudents, (req, res, next) => {
-      console.log('getting students')
       if (!req.batch || !req.students) { return next() }
       res.json(req.batch.students)
     })
 
     .get('/batches/:id/students/:id', loadBatch, /*getStudents,*/ (req, res, next) => {
-      console.log('getting one student')
-      console.log(req.params.id)
       if (!req.batch || !req.students) { return next() }
       res.json(req.students)
     })
@@ -71,17 +67,17 @@ module.exports = io => {
     .post('/batches/:id/students', authenticate, loadBatch, (req, res, next) => {
       if (!req.batch) { return next() }
 
-      const userId = req.account._id
+      newStudent = req.body
 
       // Change to compare new student id to existing students
-      if (req.batch.students.filter((s) => s.userId.toString() === userId.toString()).length > 0) {
-        const error = Error.new('This student is already in the batch!')
-        error.status = 401
-        return next(error)
-      }
+      // if (req.batch.students.filter((s) => s.name.toString() === newStudent.name.toString()).length > 0) {
+      //   const error = Error.new('This student is already in the batch!')
+      //   error.status = 401
+      //   return next(error)
+      // }
 
       // Add the student to the students
-      req.batch.students = [...req.batch.students, { userId }]
+      req.batch.students = [...req.batch.students, newStudent]
 
       req.batch.save()
         .then((batch) => {
@@ -104,19 +100,26 @@ module.exports = io => {
       res.json(req.students)
     })
 
-    .delete('/batches/:id/students', authenticate, (req, res, next) => {
+    .delete('/batches/:id/students', authenticate, loadBatch, (req, res, next) => {
+
+      console.log('deleting...')
+
       if (!req.batch) { return next() }
 
-      const userId = req.account._id
-      const currentStudent = req.batch.students.filter((s) => s.userId.toString() === userId.toString())[0]
+      const studentId = req.body.id
+      const currentStudent = req.batch.students.filter((s) => {
+        return s._id.toString() === studentId
+      })[0]
 
-      if (!currentPlayer) {
-        const error = Error.new('This student is not part of this batch!')
+      console.log(currentStudent)
+
+      if (!currentStudent) {
+        const error = new Error('This student is not part of this batch!')
         error.status = 401
         return next(error)
       }
 
-      req.batch.students = req.batch.students.filter((s) => s.userId.toString() !== userId.toString())
+      req.batch.students = req.batch.students.filter((s) => s._id.toString() !== studentId)
       req.batch.save()
         .then((batch) => {
           req.batch = batch

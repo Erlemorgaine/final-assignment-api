@@ -4,7 +4,7 @@ const { Schema } = mongoose
 
 const daySchema = new Schema({
   date: { type: Date, default: Date.now },
-  color: { type: String },
+  color: { type: String, default: 'red' },
 });
 
 const studentSchema = new Schema({
