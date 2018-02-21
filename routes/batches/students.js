@@ -71,17 +71,19 @@ module.exports = io => {
     .post('/batches/:id/students', authenticate, loadBatch, (req, res, next) => {
       if (!req.batch) { return next() }
 
-      const userId = req.account._id
+      newStudent = req.body
 
       // Change to compare new student id to existing students
-      if (req.batch.students.filter((s) => s.userId.toString() === userId.toString()).length > 0) {
-        const error = Error.new('This student is already in the batch!')
-        error.status = 401
-        return next(error)
-      }
+      // if (req.batch.students.filter((s) => s.name.toString() === newStudent.name.toString()).length > 0) {
+      //   const error = Error.new('This student is already in the batch!')
+      //   error.status = 401
+      //   return next(error)
+      // }
 
       // Add the student to the students
-      req.batch.students = [...req.batch.students, { userId }]
+      req.batch.students = [...req.batch.students, newStudent]
+      console.log(req.batch.students)
+      console.log(newStudent.name)
 
       req.batch.save()
         .then((batch) => {
