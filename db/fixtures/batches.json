@@ -7,7 +7,7 @@
       {
         "name": "Hermione Granger",
         "picture": "",
-        "days": [
+        "evaluations": [
           {
             "date": "Feb 10, 2018",
             "color": "green"
@@ -21,7 +21,7 @@
       {
         "name": "Ron Weasley",
         "picture": "",
-        "days": [
+        "evaluations": [
           {
             "date": "Feb 10, 2018",
             "color": "yellow"
@@ -35,7 +35,7 @@
       {
         "name": "Lucius Malfoy",
         "picture": "",
-        "days": [
+        "evaluations": [
           {
             "date": "Feb 12, 2018",
             "color": "red"
@@ -57,7 +57,7 @@
       {
         "name": "Edward Elric",
         "picture": "",
-        "days": [
+        "evaluations": [
           {
             "date": "March 10, 2018",
             "color": "green"
@@ -71,7 +71,7 @@
       {
         "name": "Roy Mustang",
         "picture": "",
-        "days": [
+        "evaluations": [
           {
             "date": "March 14, 2018",
             "color": "yellow"
@@ -85,7 +85,7 @@
       {
         "name": "Riza Hawkeye",
         "picture": "",
-        "days": [
+        "evaluations": [
           {
             "date": "March 14, 2018",
             "color": "green"
@@ -99,7 +99,7 @@
       {
         "name": "Lan Fan",
         "picture": "",
-        "days": [
+        "evaluations": [
           {
             "date": "March 12, 2018",
             "color": "yellow"
@@ -121,7 +121,7 @@
       {
         "name": "Anna Marie Raven",
         "picture": "",
-        "days": [
+        "evaluations": [
           {
             "date": "April 10, 2018",
             "color": "red"
@@ -135,7 +135,7 @@
       {
         "name": "Hank McCoy ",
         "picture": "",
-        "days": [
+        "evaluations": [
           {
             "date": "April 14, 2018",
             "color": "green"
@@ -149,7 +149,7 @@
       {
         "name": "James Howlett",
         "picture": "",
-        "days": [
+        "evaluations": [
           {
             "date": "April 14, 2018",
             "color": "red"
@@ -163,7 +163,7 @@
       {
         "name": "Kitty Pride",
         "picture": "",
-        "days": [
+        "evaluations": [
           {
             "date": "April 12, 2018",
             "color": "yellow"

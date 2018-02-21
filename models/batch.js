@@ -1,16 +1,16 @@
-// models/batch.js
 const mongoose = require('../config/database')
 const { Schema } = mongoose
 
-const daySchema = new Schema({
+const evaluationSchema = new Schema({
   date: { type: Date, default: Date.now },
   color: { type: String },
+  userId: { type: String },
 });
 
 const studentSchema = new Schema({
   name: { type: String },
   picture: { type: String },
-  days: [daySchema],
+  evaluations: [evaluationSchema],
 });
 
 const batchSchema = new Schema({
