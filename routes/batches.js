@@ -3,7 +3,7 @@ const router = require('express').Router()
 const passport = require('../config/auth')
 const { Batch } = require('../models')
 const utils = require('../lib/utils')
-const processMove = require('../lib/processMove')
+const updateAskedStudents = require('../lib/updateAskedStudents')
 
 const authenticate = passport.authorize('jwt', { session: false })
 
@@ -35,7 +35,6 @@ module.exports = io => {
             type: 'BATCH_CREATED',
             payload: batch
           })
-          console.log(batch)
           res.json(batch)
         })
         .catch((error) => next(error))
@@ -47,7 +46,7 @@ module.exports = io => {
         .then((batch) => {
           if (!batch) { return next() }
 
-          const updatedBatch = processMove(batch)
+          const updatedBatch = updateAskedStudents(batch)
 
           Batch.findByIdAndUpdate(id, { $set: updatedBatch }, { new: true })
             .then((batch) => {

@@ -1,4 +1,3 @@
-// routes/batches.js
 const router = require('express').Router()
 const passport = require('../../config/auth')
 const { Batch, User } = require('../../models')
@@ -29,7 +28,7 @@ const getStudent = (req, res, next) => {
 }
 
 const getStudents = (req, res, next) => {
-  Promise.all(req.game.students.map(student => User.findById(student.userId)))
+  Promise.all(req.batch.students.map(student => User.findById(student.userId)))
     .then((users) => {
       // Combine player data and user's name
       req.students = req.batch.students.map((player) => {
@@ -99,10 +98,66 @@ module.exports = io => {
       })
       res.json(req.students)
     })
+    .post('/batches/:id/students/evaluations', authenticate, loadBatch, (req, res, next) => {
 
+      if (!req.batch) { return next() }
+
+      newEvaluation = req.body[0]
+
+      const students = req.batch.students
+      const currentStudent = students.filter((s) => {
+        console.log(req.body[1])
+        return s._id.toString() === req.body[1].toString()
+      })[0]
+
+      console.log('Current student index is: ' + currentStudent)
+
+      const currentStudentIndex = students.indexOf(currentStudent)
+
+      req.batch.students[currentStudentIndex].evaluations = [...students[currentStudentIndex].evaluations, newEvaluation]
+
+      req.batch.save()
+        .then((batch) => {
+          req.batch = batch
+          next()
+        })
+        .catch((error) => next(error))
+      },
+      // Fetch students data
+      /*getStudents,*/
+      // Respond with new student data in JSON and over socket
+      (req, res, next) => {
+      io.emit('action', {
+        type: 'BATCH_STUDENTS_UPDATED',
+        payload: {
+          batch: req.batch,
+          students: req.students
+        }
+      })
+      res.json(req.students)
+    })
+    .patch('/batches/:id/students', authenticate, (req, res, next) => {
+      const id = req.params.id
+
+      Batch.findById(id)
+        .then((batch) => {
+          if (!batch) { return next() }
+
+          const updatedBatch = updateAskedStudents(batch)
+
+          Batch.findByIdAndUpdate(id, { $set: updatedBatch }, { new: true })
+            .then((batch) => {
+              io.emit('action', {
+                type: 'BATCH_UPDATED',
+                payload: batch
+              })
+              res.json(batch)
+            })
+            .catch((error) => next(error))
+        })
+        .catch((error) => next(error))
+    })
     .delete('/batches/:id/students', authenticate, loadBatch, (req, res, next) => {
-
-      console.log('deleting...')
 
       if (!req.batch) { return next() }
 
@@ -110,8 +165,6 @@ module.exports = io => {
       const currentStudent = req.batch.students.filter((s) => {
         return s._id.toString() === studentId
       })[0]
-
-      console.log(currentStudent)
 
       if (!currentStudent) {
         const error = new Error('This student is not part of this batch!')
