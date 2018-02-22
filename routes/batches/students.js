@@ -19,6 +19,7 @@ module.exports = io => {
   router
     .get('/batches/:id/students', (req, res, next) => {
       id = req.params._id
+      console.log('Params are ' + req.params._id)
 
       Batch.findById(id)
         .then((batch) => {
@@ -28,7 +29,7 @@ module.exports = io => {
         })
     })
 
-    .get('/batches/:id/students/:id', loadBatch, /*getStudents,*/ (req, res, next) => {
+    .get('/batches/:id/students/:id', loadBatch, (req, res, next) => {
       if (!req.batch || !req.students) { return next() }
       res.json(req.students)
     })
@@ -40,8 +41,6 @@ module.exports = io => {
 
       req.batch.students = [...req.batch.students, newStudent]
 
-      console.log('The new students are: ' + req.batch.students)
-
       req.batch.save()
         .then((batch) => {
           req.batch = batch
@@ -49,7 +48,7 @@ module.exports = io => {
         })
         .catch((error) => next(error))
     },
-    // Fetch students data
+
     /*getStudents,*/
     // Respond with new student data in JSON and over socket
     (req, res, next) => {
@@ -57,7 +56,7 @@ module.exports = io => {
         type: 'BATCH_STUDENTS_UPDATED',
         payload: {
           batch: req.batch,
-          students: req.students
+          students: req.batch.students
         }
       })
       res.json(req.students)
@@ -80,8 +79,6 @@ module.exports = io => {
         day = e.date.getDate()
         month = e.date.getMonth()
         year = e.date.getFullYear()
-
-        console.log(req.body[0].date.toString())
 
         return `${year}-0${month}-${day}` === req.body[0].date.toString()
       })
@@ -111,7 +108,7 @@ module.exports = io => {
         type: 'BATCH_STUDENTS_EVALUATIONS_UPDATED',
         payload: {
           batch: req.batch,
-          students: req.students
+          students: req.batch.students
         }
       })
       res.json(req.students)
@@ -168,15 +165,12 @@ module.exports = io => {
         })
         .catch((error) => next(error))
       },
-      // Fetch students data
-      /*getStudents,*/
-      // Respond with new student data in JSON and over socket
       (req, res, next) => {
       io.emit('action', {
         type: 'BATCH_STUDENT_UPDATED',
         payload: {
           batch: req.batch,
-          students: req.students
+          students: req.batch.students
         }
       })
       res.json(req.students)
@@ -237,18 +231,16 @@ module.exports = io => {
         })
         .catch((error) => next(error))
       },
-      // Fetch students data
-      /*getStudents,*/
-      // Respond with new student data in JSON and over socket
+
       (req, res, next) => {
       io.emit('action', {
         type: 'BATCH_STUDENT_UPDATED',
         payload: {
           batch: req.batch,
-          students: req.students
+          students: req.batch.students
         }
       })
-      res.json(req.students)
+      res.json(req.batch.students)
     })
     .delete('/batches/:id/students', authenticate, loadBatch, (req, res, next) => {
 
@@ -274,18 +266,16 @@ module.exports = io => {
         .catch((error) => next(error))
 
     },
-    // Fetch new student data
-    /*getStudents,*/
-    // Respond with new student data in JSON and over socket
+
     (req, res, next) => {
       io.emit('action', {
         type: 'BATCH_STUDENTS_UPDATED',
         payload: {
           batch: req.batch,
-          students: req.students
+          students: req.batch.students
         }
       })
-      res.json(req.students)
+      res.json(req.batch.students)
     })
 
   return router
