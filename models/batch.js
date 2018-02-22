@@ -5,6 +5,7 @@ const evaluationSchema = new Schema({
   date: { type: Date, default: Date.now },
   color: { type: String },
   userId: { type: String },
+  remarks: { type: String, default: '' }
 });
 
 const studentSchema = new Schema({

@@ -102,6 +102,7 @@ module.exports = io => {
 
       if (!req.batch) { return next() }
 
+      console.log(req.body[0])
       let newEvaluation = {...req.body[0], userId: req.account._id}
 
       const students = req.batch.students
@@ -178,7 +179,7 @@ module.exports = io => {
             updatedPicture = req.body[1].picture
           }
 
-          const updatedStudents = batch.students.map((s) => {
+          const updatedStudents = students.map((s) => {
             if (s._id.toString() === req.body[0].toString()) {
               s.firstName = updatedFirstName
               s.lastName = updatedLastName
@@ -187,7 +188,74 @@ module.exports = io => {
             return s
           })
 
-          console.log(updatedStudents)
+          const updatedBatch = {...batch, students: updatedStudents}
+
+          Batch.findByIdAndUpdate(id, { $set: updatedBatch }, { new: true })
+            .then((batch) => {
+              io.emit('action', {
+                type: 'BATCH_STUDENT_UPDATED',
+                payload: batch
+              })
+              res.json(batch)
+            })
+            .catch((error) => next(error))
+        })
+        .catch((error) => next(error))
+      },
+      // Fetch students data
+      /*getStudents,*/
+      // Respond with new student data in JSON and over socket
+      (req, res, next) => {
+      io.emit('action', {
+        type: 'BATCH_STUDENT_UPDATED',
+        payload: {
+          batch: req.batch,
+          students: req.students
+        }
+      })
+      res.json(req.students)
+    })
+    .patch('/batches/:id/students/evaluations', authenticate, (req, res, next) => {
+      const id = req.params.id
+
+      Batch.findById(id)
+        .then((batch) => {
+          if (!batch) { return next() }
+
+          let students = batch.students
+
+          const currentStudent = students.filter((s) => {
+            return s._id.toString() === req.body[0].toString()
+          })[0]
+
+          const currentEvaluation = currentStudent.evaluations.filter((e) => {
+            return e._id.toString() === req.body[1].toString()
+          })[0]
+
+          if (req.body[2].remarks) {
+            updatedRemarks = req.body[2].remarks
+          }
+
+          if (req.body[2].color) {
+            updatedColor = req.body[2].color
+          }
+
+          const updatedEvaluations = currentStudent.evaluations.map((e) => {
+            if (e._id.toString() === req.body[1].toString()) {
+              e.remarks = updatedRemarks
+              e.color = updatedColor
+            }
+            return e
+          })
+
+          const updatedStudents = students.map((s) => {
+            if (s._id.toString() === req.body[0].toString()) {
+              s.evaluations = updatedEvaluations
+            }
+            return s
+          })
+
+          console.log(updatedEvaluations)
 
           const updatedBatch = {...batch, students: updatedStudents}
 
