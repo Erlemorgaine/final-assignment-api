@@ -19,7 +19,6 @@ module.exports = io => {
   router
     .get('/batches/:id/students', (req, res, next) => {
       id = req.params._id
-      console.log('Params are ' + req.params._id)
 
       Batch.findById(id)
         .then((batch) => {
@@ -49,8 +48,6 @@ module.exports = io => {
         .catch((error) => next(error))
     },
 
-    /*getStudents,*/
-    // Respond with new student data in JSON and over socket
     (req, res, next) => {
       io.emit('action', {
         type: 'BATCH_STUDENTS_UPDATED',
@@ -59,7 +56,7 @@ module.exports = io => {
           students: req.batch.students
         }
       })
-      res.json(req.students)
+      res.json(req.batch.students)
     })
     .post('/batches/:id/students/evaluations', authenticate, loadBatch, (req, res, next) => {
 
@@ -173,7 +170,7 @@ module.exports = io => {
           students: req.batch.students
         }
       })
-      res.json(req.students)
+      res.json(req.batch.students)
     })
     .patch('/batches/:id/students/evaluations', authenticate, (req, res, next) => {
       const id = req.params.id
@@ -191,6 +188,9 @@ module.exports = io => {
           const currentEvaluation = currentStudent.evaluations.filter((e) => {
             return e._id.toString() === req.body[1].toString()
           })[0]
+
+          let updatedRemarks = currentEvaluation.remarks
+          let updatedColor = currentEvaluation.color
 
           if (req.body[2].remarks) {
             updatedRemarks = req.body[2].remarks
@@ -215,14 +215,12 @@ module.exports = io => {
             return s
           })
 
-          console.log(updatedEvaluations)
-
           const updatedBatch = {...batch, students: updatedStudents}
 
           Batch.findByIdAndUpdate(id, { $set: updatedBatch }, { new: true })
             .then((batch) => {
               io.emit('action', {
-                type: 'BATCH_STUDENT_UPDATED',
+                type: 'BATCH_STUDENT_EVALUATION_UPDATED',
                 payload: batch
               })
               res.json(batch)
@@ -243,7 +241,6 @@ module.exports = io => {
       res.json(req.batch.students)
     })
     .delete('/batches/:id/students', authenticate, loadBatch, (req, res, next) => {
-
       if (!req.batch) { return next() }
 
       const studentId = req.body.id
