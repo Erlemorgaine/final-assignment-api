@@ -15,47 +15,17 @@ const loadBatch = (req, res, next) => {
     .catch((error) => next(error))
 }
 
-//figure out how to use this
-const getStudent = (req, res, next) => {
-  const id = req.params.id
-
-  Batch.findById(id)
-    .then((batch) => {
-      req.batch = batch
-      next()
-    })
-    .catch((error) => next(error))
-}
-
-const getStudents = (req, res, next) => {
-  Promise.all(req.batch.students.map(student => User.findById(student.userId)))
-    .then((users) => {
-      // Combine player data and user's name
-      req.students = req.batch.students.map((player) => {
-        const { name } = users
-          .filter((u) => u._id.toString() === student.userId.toString())[0]
-
-        return {
-          userId: student.userId,
-          symbol: student.symbol,
-          name
-        }
-      })
-      next()
-    })
-    .catch((error) => next(error))
-}
-
-// const getStudents = (req, res, next) => {
-//   req.students = req.batch.students
-//   next()
-// }
-
 module.exports = io => {
   router
-    .get('/batches/:id/students', loadBatch, getStudents, (req, res, next) => {
-      if (!req.batch || !req.students) { return next() }
-      res.json(req.batch.students)
+    .get('/batches/:id/students', (req, res, next) => {
+      id = req.params._id
+
+      Batch.findById(id)
+        .then((batch) => {
+          if (!batch || !batch.students) { return next() }
+
+          res.json(batch.students)
+        })
     })
 
     .get('/batches/:id/students/:id', loadBatch, /*getStudents,*/ (req, res, next) => {
@@ -68,15 +38,9 @@ module.exports = io => {
 
       newStudent = {...req.body, evaluations: [{ date: '', color: 'red' }]}
 
-      // Change to compare new student id to existing students
-      // if (req.batch.students.filter((s) => s.name.toString() === newStudent.name.toString()).length > 0) {
-      //   const error = Error.new('This student is already in the batch!')
-      //   error.status = 401
-      //   return next(error)
-      // }
-
-      // Add the student to the students
       req.batch.students = [...req.batch.students, newStudent]
+
+      console.log('The new students are: ' + req.batch.students)
 
       req.batch.save()
         .then((batch) => {
@@ -102,7 +66,6 @@ module.exports = io => {
 
       if (!req.batch) { return next() }
 
-      console.log(req.body[0])
       let newEvaluation = {...req.body[0], userId: req.account._id}
 
       const students = req.batch.students
@@ -111,6 +74,9 @@ module.exports = io => {
       })[0]
 
       const doubleDate = currentStudent.evaluations.filter((e) => {
+        if (!e.date) {
+          return
+        }
         day = e.date.getDate()
         month = e.date.getMonth()
         year = e.date.getFullYear()
