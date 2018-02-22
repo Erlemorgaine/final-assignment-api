@@ -102,7 +102,7 @@ module.exports = io => {
 
       if (!req.batch) { return next() }
 
-      let newEvaluation = req.body[0]
+      let newEvaluation = {...req.body[0], userId: req.account._id}
 
       const students = req.batch.students
       const currentStudent = students.filter((s) => {
