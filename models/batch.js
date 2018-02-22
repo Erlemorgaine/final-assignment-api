@@ -8,7 +8,8 @@ const evaluationSchema = new Schema({
 });
 
 const studentSchema = new Schema({
-  name: { type: String },
+  firstName: { type: String },
+  lastName: { type: String },
   picture: { type: String },
   evaluations: [evaluationSchema],
 });

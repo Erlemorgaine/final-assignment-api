@@ -5,7 +5,8 @@
     "endDate": "Feb 29, 2018",
     "students": [
       {
-        "name": "Hermione Granger",
+        "firstName": "Hermione",
+        "lastName": "Granger",
         "picture": "https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/Hermione_Granger_poster.jpg/220px-Hermione_Granger_poster.jpg",
         "evaluations": [
           {
@@ -19,7 +20,8 @@
         ]
       },
       {
-        "name": "Ron Weasley",
+        "firstName": "Ron",
+        "lastName": "Weasley",
         "picture": "https://upload.wikimedia.org/wikipedia/en/thumb/5/5e/Ron_Weasley_poster.jpg/220px-Ron_Weasley_poster.jpg",
         "evaluations": [
           {
@@ -33,7 +35,8 @@
         ]
       },
       {
-        "name": "Draco Malfoy",
+        "firstName": "Draco",
+        "lastName": "Malfoy",
         "picture": "https://vignette.wikia.nocookie.net/harrypotter/images/c/cf/Harry-Potter-The-Deathly-Hallows-Part-II.jpg/revision/latest/scale-to-width-down/325?cb=20140602031803",
         "evaluations": [
           {
@@ -55,7 +58,8 @@
     "endDate": "March 29, 2018",
     "students": [
       {
-        "name": "Edward Elric",
+        "firstName": "Edward",
+        "lastName": "Elric",
         "picture": "https://vignette.wikia.nocookie.net/fma/images/d/d3/Avatar_edward.png/revision/latest?cb=20170303004709",
         "evaluations": [
           {
@@ -69,7 +73,8 @@
         ]
       },
       {
-        "name": "Roy Mustang",
+        "firstName": "Roy",
+        "lastName": "Mustang",
         "picture": "https://myanimelist.cdn-dena.com/images/characters/9/186277.jpg",
         "evaluations": [
           {
@@ -83,7 +88,8 @@
         ]
       },
       {
-        "name": "Riza Hawkeye",
+        "firstName": "Riza",
+        "lastName": "Hawkeye",
         "picture": "http://www.favslist.com/photos/pages/x1/Riza-Hawkeye-1399338758-67616.jpg",
         "evaluations": [
           {
@@ -97,7 +103,8 @@
         ]
       },
       {
-        "name": "Lan Fan",
+        "firstName": "Lan",
+        "lastName": " Fan",
         "picture": "https://vignette.wikia.nocookie.net/fma/images/9/9f/LanFan_masked.jpg/revision/latest?cb=20090805165021",
         "evaluations": [
           {
@@ -119,7 +126,8 @@
     "endDate": "April 29, 2018",
     "students": [
       {
-        "name": "Anna Marie Raven",
+        "firstName": "Anna Marie",
+        "lastName": "Raven",
         "picture": "https://i.annihil.us/u/prod/marvel//universe3zx/images/f/f6/Rogue.jpg",
         "evaluations": [
           {
@@ -133,7 +141,8 @@
         ]
       },
       {
-        "name": "Hank McCoy ",
+        "firstName": "Hank",
+        "lastName": "McCoy ",
         "picture": "https://vignette.wikia.nocookie.net/xmenevo/images/8/89/X-Men_Ledgens_-_beast.png/revision/latest?cb=20120722055818",
         "evaluations": [
           {
@@ -147,7 +156,8 @@
         ]
       },
       {
-        "name": "James Howlett",
+        "firstName": "James",
+        "lastName": "Howlett",
         "picture": "https://vignette.wikia.nocookie.net/marveldatabase/images/7/71/James_Howlett_%28Earth-7153%29_from_X-Factor_Vol_1_229_0001.jpg/revision/latest?cb=20111222175725",
         "evaluations": [
           {
@@ -161,7 +171,8 @@
         ]
       },
       {
-        "name": "Kitty Pryde",
+        "firstName": "Kitty",
+        "lastName": "Pryde",
         "picture": "https://upload.wikimedia.org/wikipedia/en/thumb/0/0a/Kitty_Pryde_Astonishing_X-Men_Vol_3_16.png/250px-Kitty_Pryde_Astonishing_X-Men_Vol_3_16.png",
         "evaluations": [
           {

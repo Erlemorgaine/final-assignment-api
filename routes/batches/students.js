@@ -66,7 +66,7 @@ module.exports = io => {
     .post('/batches/:id/students', authenticate, loadBatch, (req, res, next) => {
       if (!req.batch) { return next() }
 
-      newStudent = req.body
+      newStudent = {...req.body, evaluations: [{ date: '', color: 'red' }]}
 
       // Change to compare new student id to existing students
       // if (req.batch.students.filter((s) => s.name.toString() === newStudent.name.toString()).length > 0) {
@@ -102,15 +102,12 @@ module.exports = io => {
 
       if (!req.batch) { return next() }
 
-      newEvaluation = req.body[0]
+      let newEvaluation = req.body[0]
 
       const students = req.batch.students
       const currentStudent = students.filter((s) => {
-        console.log(req.body[1])
         return s._id.toString() === req.body[1].toString()
       })[0]
-
-      console.log('Current student index is: ' + currentStudent)
 
       const currentStudentIndex = students.indexOf(currentStudent)
 
@@ -128,7 +125,7 @@ module.exports = io => {
       // Respond with new student data in JSON and over socket
       (req, res, next) => {
       io.emit('action', {
-        type: 'BATCH_STUDENTS_UPDATED',
+        type: 'BATCH_STUDENTS_EVALUATIONS_UPDATED',
         payload: {
           batch: req.batch,
           students: req.students
@@ -143,12 +140,45 @@ module.exports = io => {
         .then((batch) => {
           if (!batch) { return next() }
 
-          const updatedBatch = updateAskedStudents(batch)
+          let students = batch.students
+
+          const currentStudent = students.filter((s) => {
+            return s._id.toString() === req.body[0].toString()
+          })[0]
+
+          let updatedFirstName = currentStudent.firstName
+          let updatedLastName = currentStudent.lastName
+          let updatedPicture = currentStudent.picture
+
+          if (req.body[1].firstName) {
+            updatedFirstName = req.body[1].firstName
+          }
+
+          if (req.body[1].lastName) {
+            updatedLastName = req.body[1].lastName
+          }
+
+          if (req.body[1].picture) {
+            updatedPicture = req.body[1].picture
+          }
+
+          const updatedStudents = batch.students.map((s) => {
+            if (s._id.toString() === req.body[0].toString()) {
+              s.firstName = updatedFirstName
+              s.lastName = updatedLastName
+              s.picture = updatedPicture
+            }
+            return s
+          })
+
+          console.log(updatedStudents)
+
+          const updatedBatch = {...batch, students: updatedStudents}
 
           Batch.findByIdAndUpdate(id, { $set: updatedBatch }, { new: true })
             .then((batch) => {
               io.emit('action', {
-                type: 'BATCH_UPDATED',
+                type: 'BATCH_STUDENT_UPDATED',
                 payload: batch
               })
               res.json(batch)
@@ -156,6 +186,19 @@ module.exports = io => {
             .catch((error) => next(error))
         })
         .catch((error) => next(error))
+      },
+      // Fetch students data
+      /*getStudents,*/
+      // Respond with new student data in JSON and over socket
+      (req, res, next) => {
+      io.emit('action', {
+        type: 'BATCH_STUDENT_UPDATED',
+        payload: {
+          batch: req.batch,
+          students: req.students
+        }
+      })
+      res.json(req.students)
     })
     .delete('/batches/:id/students', authenticate, loadBatch, (req, res, next) => {
 
