@@ -109,6 +109,22 @@ module.exports = io => {
         return s._id.toString() === req.body[1].toString()
       })[0]
 
+      const doubleDate = currentStudent.evaluations.filter((e) => {
+        day = e.date.getDate()
+        month = e.date.getMonth()
+        year = e.date.getFullYear()
+
+        console.log(req.body[0].date.toString())
+
+        return `${year}-0${month}-${day}` === req.body[0].date.toString()
+      })
+
+      if (doubleDate.length > 0) {
+        let err = new Error('This date already has an evaluation!')
+        err.status = 422
+        throw err
+      }
+
       const currentStudentIndex = students.indexOf(currentStudent)
 
       req.batch.students[currentStudentIndex].evaluations = [...students[currentStudentIndex].evaluations, newEvaluation]
