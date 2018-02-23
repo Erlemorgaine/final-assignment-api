@@ -20,7 +20,7 @@ const loadBatch = (req, res, next) => {
 module.exports = io => {
   router
     .get('/batches/:id/students', (req, res, next) => {
-      id = req.params._id
+      id = req.params.id
 
       Batch.findById(id)
         .then((batch) => {
@@ -102,13 +102,13 @@ module.exports = io => {
 
       (req, res, next) => {
       io.emit('action', {
-        type: 'BATCH_STUDENTS_EVALUATIONS_UPDATED',
+        type: 'BATCH_STUDENT_EVALUATIONS_UPDATED',
         payload: {
           batch: req.batch,
           students: req.batch.students
         }
       })
-      res.json(req.students)
+      res.json(req.batch.students)
     })
     .patch('/batches/:id/students', authenticate, (req, res, next) => {
       const id = req.params.id
@@ -135,11 +135,11 @@ module.exports = io => {
       io.emit('action', {
         type: 'BATCH_STUDENT_UPDATED',
         payload: {
-          batch: req.batch,
-          students: req.batch.students
+          batch: batch,
+          students: batch.students
         }
       })
-      res.json(req.batch.students)
+      res.json(batch.students)
     })
     .patch('/batches/:id/students/evaluations', authenticate, (req, res, next) => {
       const id = req.params.id
@@ -165,7 +165,7 @@ module.exports = io => {
 
       (req, res, next) => {
       io.emit('action', {
-        type: 'BATCH_STUDENT_UPDATED',
+        type: 'BATCH_STUDENT_EVALUATION_UPDATED',
         payload: {
           batch: req.batch,
           students: req.batch.students
