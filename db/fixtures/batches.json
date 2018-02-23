@@ -54,6 +54,57 @@
             "color": "green"
           }
         ]
+      },
+      {
+        "firstName": "Harry",
+        "lastName": "Potter",
+        "picture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGo1rY7oS3OX8BFpteCJx0UxJDYJyWIzYVWBEOT3LWx3t4SrwrDg",
+        "evaluations": [
+          {
+            "userId": "5a8fc74ec5b54c1444135753",
+            "date": "Feb 12, 2018",
+            "color": "red"
+          },
+          {
+            "userId": "5a8fc74ec5b54c1444135753",
+            "date": "Feb 13, 2018",
+            "color": "green"
+          }
+        ]
+      },
+      {
+        "firstName": "Sirius",
+        "lastName": "Black",
+        "picture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTk8Uu9t0AZbf7jPVbXNgwX47YwgvXRJ93uQAHGI70nslLFXE3_",
+        "evaluations": [
+          {
+            "userId": "5a8fc74ec5b54c1444135753",
+            "date": "Feb 12, 2018",
+            "color": "red"
+          },
+          {
+            "userId": "5a8fc74ec5b54c1444135753",
+            "date": "Feb 13, 2018",
+            "color": "green"
+          }
+        ]
+      },
+      {
+        "firstName": "Rubeus",
+        "lastName": "Hagrid",
+        "picture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRju-3kyvjvkWdHOqSxfM3JJ_ADkxo1bFSkP4k5VFLfb1-sOWMKTw",
+        "evaluations": [
+          {
+            "userId": "5a8fc74ec5b54c1444135753",
+            "date": "Feb 12, 2018",
+            "color": "red"
+          },
+          {
+            "userId": "5a8fc74ec5b54c1444135753",
+            "date": "Feb 13, 2018",
+            "color": "green"
+          }
+        ]
       }
     ],
     "askedStudents": []
@@ -130,6 +181,40 @@
             "color": "yellow"
           }
         ]
+      },
+      {
+        "firstName": "Alphonse",
+        "lastName": " Elric",
+        "picture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXaZcdu0J9H5OnTwyNT_o313QLWSoGpLv3RYyodQcZ9IyFmNxNYA",
+        "evaluations": [
+          {
+            "userId": "5a8fc74ec5b54c1444135753",
+            "date": "March 12, 2018",
+            "color": "yellow"
+          },
+          {
+            "userId": "5a8fc74ec5b54c1444135753",
+            "date": "March 13, 2018",
+            "color": "yellow"
+          }
+        ]
+      },
+      {
+        "firstName": "Winry",
+        "lastName": " Rockbell",
+        "picture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAa61jhU7_bGSSymbQMUYnJDvEnnFAa_c3bn-1CzW8y_B1KbkAoA",
+        "evaluations": [
+          {
+            "userId": "5a8fc74ec5b54c1444135753",
+            "date": "March 12, 2018",
+            "color": "yellow"
+          },
+          {
+            "userId": "5a8fc74ec5b54c1444135753",
+            "date": "March 13, 2018",
+            "color": "yellow"
+          }
+        ]
       }
     ],
     "askedStudents": []
@@ -194,6 +279,57 @@
         "firstName": "Kitty",
         "lastName": "Pryde",
         "picture": "https://upload.wikimedia.org/wikipedia/en/thumb/0/0a/Kitty_Pryde_Astonishing_X-Men_Vol_3_16.png/250px-Kitty_Pryde_Astonishing_X-Men_Vol_3_16.png",
+        "evaluations": [
+          {
+            "userId": "5a8fc74ec5b54c1444135753",
+            "date": "April 12, 2018",
+            "color": "yellow"
+          },
+          {
+            "userId": "5a8fc74ec5b54c1444135753",
+            "date": "April 13, 2018",
+            "color": "green"
+          }
+        ]
+      },
+      {
+        "firstName": "Remy",
+        "lastName": "LeBeau",
+        "picture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSq0emdkLERQpmR1yolBGajLzUpVWVvFtgpwxSJumlPKmnb-qQJcQ",
+        "evaluations": [
+          {
+            "userId": "5a8fc74ec5b54c1444135753",
+            "date": "April 12, 2018",
+            "color": "yellow"
+          },
+          {
+            "userId": "5a8fc74ec5b54c1444135753",
+            "date": "April 13, 2018",
+            "color": "green"
+          }
+        ]
+      },
+      {
+        "firstName": "Ororo",
+        "lastName": "Munroe",
+        "picture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkkAuNA0n5nGVHend4xSLXB2tWHjOxzlCr_lqjIVMfryHPs6lp",
+        "evaluations": [
+          {
+            "userId": "5a8fc74ec5b54c1444135753",
+            "date": "April 12, 2018",
+            "color": "yellow"
+          },
+          {
+            "userId": "5a8fc74ec5b54c1444135753",
+            "date": "April 13, 2018",
+            "color": "green"
+          }
+        ]
+      },
+      {
+        "firstName": "Charles",
+        "lastName": "Xavier",
+        "picture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTT0Y5WkaHk9qOrVm0pVjmWQ9MSOGBzTfkthkeNw4j6fVZ7yBWP",
         "evaluations": [
           {
             "userId": "5a8fc74ec5b54c1444135753",
