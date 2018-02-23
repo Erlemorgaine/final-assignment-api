@@ -2,4 +2,9 @@
   "name": "Harry Potter",
   "email": "harrypotter@hogwarts.com",
   "password": "1234abcd"
+},
+{
+  "name": "Erle Monfils",
+  "email": "erle@a.com",
+  "password": "1234abcd"
 }

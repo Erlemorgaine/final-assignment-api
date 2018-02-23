@@ -1,6 +1,6 @@
 const router = require('express').Router()
-const passport = require('../../config/auth')
-const { Batch, User } = require('../../models')
+const passport = require('../../../config/auth')
+const { Batch, User } = require('../../../models')
 const editEvaluation = require('../../../lib/editEvaluation')
 
 const authenticate = passport.authorize('jwt', { session: false })
@@ -60,13 +60,13 @@ module.exports = io => {
 
       (req, res, next) => {
       io.emit('action', {
-        type: 'BATCH_STUDENTS_EVALUATIONS_UPDATED',
+        type: 'BATCH_STUDENT_EVALUATIONS_UPDATED',
         payload: {
           batch: req.batch,
           students: req.batch.students
         }
       })
-      res.json(req.students)
+      res.json(req.batch.students)
     })
     .patch('/batches/:id/students/evaluations', authenticate, (req, res, next) => {
       const id = req.params.id
@@ -92,7 +92,7 @@ module.exports = io => {
 
       (req, res, next) => {
       io.emit('action', {
-        type: 'BATCH_STUDENT_UPDATED',
+        type: 'BATCH_STUDENT_EVALUATION_UPDATED',
         payload: {
           batch: req.batch,
           students: req.batch.students
