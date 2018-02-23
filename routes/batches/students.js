@@ -38,7 +38,7 @@ module.exports = io => {
     .post('/batches/:id/students', authenticate, loadBatch, (req, res, next) => {
       if (!req.batch) { return next() }
 
-      newStudent = {...req.body, evaluations: [{ date: '', color: 'red' }]}
+      newStudent = {...req.body, evaluations: [{ date: Date.now(), color: 'red', remarks: 'Not yet evaluated', userId: req.account._id }]}
 
       req.batch.students = [...req.batch.students, newStudent]
 
