@@ -1,6 +1,8 @@
 const router = require('express').Router()
 const passport = require('../../config/auth')
 const { Batch, User } = require('../../models')
+const editStudent = require('../../lib/editStudent')
+const editEvaluation = require('../../lib/editEvaluation')
 
 const authenticate = passport.authorize('jwt', { session: false })
 
@@ -97,9 +99,7 @@ module.exports = io => {
         })
         .catch((error) => next(error))
       },
-      // Fetch students data
-      /*getStudents,*/
-      // Respond with new student data in JSON and over socket
+
       (req, res, next) => {
       io.emit('action', {
         type: 'BATCH_STUDENTS_EVALUATIONS_UPDATED',
@@ -117,38 +117,7 @@ module.exports = io => {
         .then((batch) => {
           if (!batch) { return next() }
 
-          let students = batch.students
-
-          const currentStudent = students.filter((s) => {
-            return s._id.toString() === req.body[0].toString()
-          })[0]
-
-          let updatedFirstName = currentStudent.firstName
-          let updatedLastName = currentStudent.lastName
-          let updatedPicture = currentStudent.picture
-
-          if (req.body[1].firstName) {
-            updatedFirstName = req.body[1].firstName
-          }
-
-          if (req.body[1].lastName) {
-            updatedLastName = req.body[1].lastName
-          }
-
-          if (req.body[1].picture) {
-            updatedPicture = req.body[1].picture
-          }
-
-          const updatedStudents = students.map((s) => {
-            if (s._id.toString() === req.body[0].toString()) {
-              s.firstName = updatedFirstName
-              s.lastName = updatedLastName
-              s.picture = updatedPicture
-            }
-            return s
-          })
-
-          const updatedBatch = {...batch, students: updatedStudents}
+          const updatedBatch = editStudent(batch, req.body)
 
           Batch.findByIdAndUpdate(id, { $set: updatedBatch }, { new: true })
             .then((batch) => {
@@ -179,43 +148,7 @@ module.exports = io => {
         .then((batch) => {
           if (!batch) { return next() }
 
-          let students = batch.students
-
-          const currentStudent = students.filter((s) => {
-            return s._id.toString() === req.body[0].toString()
-          })[0]
-
-          const currentEvaluation = currentStudent.evaluations.filter((e) => {
-            return e._id.toString() === req.body[1].toString()
-          })[0]
-
-          let updatedRemarks = currentEvaluation.remarks
-          let updatedColor = currentEvaluation.color
-
-          if (req.body[2].remarks) {
-            updatedRemarks = req.body[2].remarks
-          }
-
-          if (req.body[2].color) {
-            updatedColor = req.body[2].color
-          }
-
-          const updatedEvaluations = currentStudent.evaluations.map((e) => {
-            if (e._id.toString() === req.body[1].toString()) {
-              e.remarks = updatedRemarks
-              e.color = updatedColor
-            }
-            return e
-          })
-
-          const updatedStudents = students.map((s) => {
-            if (s._id.toString() === req.body[0].toString()) {
-              s.evaluations = updatedEvaluations
-            }
-            return s
-          })
-
-          const updatedBatch = {...batch, students: updatedStudents}
+          const updatedBatch = editEvaluation(batch, req.body)
 
           Batch.findByIdAndUpdate(id, { $set: updatedBatch }, { new: true })
             .then((batch) => {
